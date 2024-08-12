@@ -1,4 +1,3 @@
-// components/Alert.tsx
 import React from 'react';
 
 interface AlertProps {
@@ -47,7 +46,7 @@ const Alert: React.FC<AlertProps> = ({ type, text, isOpen, onClose }) => {
 
   return (
     <div
-      className={`fixed top-4 right-4 flex items-center p-4 text-sm ${textColor} border ${borderColor} rounded-lg ${bgColor} z-{100000} transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+      className={`fixed bottom-4 right-4 flex items-center p-4 text-sm ${textColor} border ${borderColor} rounded-lg ${bgColor} z-[1111111] transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
       role="alert"
     >
       <svg

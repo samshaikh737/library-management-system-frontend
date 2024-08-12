@@ -9,6 +9,7 @@ import BookTable from '@/features/Books/BookTable';
 import AlertContext from "@/context/Alert";
 import Branches from '@/features/Branch/BranchTable';
 import Users from '@/features/User/UserTable';
+import Checkouts from '@/features/Checkout/CheckoutTable';
 
 
 export default function Home() {
@@ -27,6 +28,10 @@ export default function Home() {
 
         <div className="mt-10"></div>
         <Users />
+
+
+        <div className="mt-10"></div>
+        <Checkouts />
       </div>
     </div>
 
