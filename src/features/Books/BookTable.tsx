@@ -1,19 +1,13 @@
 import { useState, useMemo } from 'react';
 import moment from 'moment';
-
-// Icons
 import { MdModeEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
-// Components
 import Table from '@/components/Table';
 import Modal from '@/components/Modal';
 import AddBookForm from '@/features/Books/AddBook';
+import { deleteBook, getAllBooks } from '@/hooks/Books';
+import { useAlert } from '@/context/Alert';
 
-// Hooks
-import { getAllBooks } from '@/hooks/Books';
-
-// Define table headers
 const headers = [
   'Title',
   'Author',
@@ -28,9 +22,24 @@ const headers = [
 
 const Home = () => {
   const { data: books, refetch } = getAllBooks(); // Fetch books data
+  const deleteBookHook = deleteBook(); // Fetch books data
+  const { showAlert } = useAlert(); // Alert hook
+
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
 
-  // Memoize table rows to optimize performance
+  const handleOnSubmit = () => {
+    setIsModalOpen(false);
+    refetch();
+  };
+
+  const handleDelete = async (id: string) => {
+    const confirmed = window.confirm('Are you sure you want to delete this book?');
+    if (confirmed) {
+      const result = await deleteBookHook.submit(id);
+      refetch()
+    }
+  };
+
   const rows = useMemo(() => books?.map(book => [
     book.title,
     book.author,
@@ -42,14 +51,13 @@ const Home = () => {
     moment(book.createdAt).format('L'), // Format date
     <div className='flex items-center justify-around'>
       <MdModeEdit className='cursor-pointer' size={20} />
-      <RiDeleteBin6Line className='cursor-pointer text-red-500' size={20} />
+      <RiDeleteBin6Line
+        className='cursor-pointer text-red-500'
+        size={20}
+        onClick={() => handleDelete(book.id)}
+      />
     </div>
   ]), [books]);
-
-  const handleOnSubmit = () => {
-    setIsModalOpen(false);
-    refetch()
-  };
 
   return (
     <div>

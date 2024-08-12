@@ -14,8 +14,14 @@ const addBook = (body) => {
     })
 }
 
+const deleteBook = (id) => {
+    return fetcher.delete(`/books/${id}`, ).then(response => {
+        return response.data;
+    })
+}
 
 export const BookService = {
     getAllBooks,
-    addBook
+    addBook,
+    deleteBook
 }
