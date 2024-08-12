@@ -71,7 +71,25 @@ export const AddBook = () => {
 
     return { submit, loader };
 };
+export const EditBook = () => {
+    const [loader, setLoader] = useState(false);
+    const { showAlert } = useAlert(); // Alert hook
 
+    const submit = async (id: any, body: any) => {
+        setLoader(true);
+
+        try {
+            const res = await BookService.editBook(id, body);
+            showAlert('success', 'Book Edit successfully');
+            return true;
+        } catch (error) {
+            setLoader(false);
+            showAlert('error', error.response.data.error);
+        }
+    };
+
+    return { submit, loader };
+};
 export const deleteBook = () => {
     const [loader, setLoader] = useState(false);
     const { showAlert } = useAlert(); // Alert hook
