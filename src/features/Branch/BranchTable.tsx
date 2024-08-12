@@ -17,7 +17,6 @@ const headers = [
     'Zip Code',
     'Phone',
     'Created At',
-    'Updated At',
     'Actions',
 ];
 
@@ -56,7 +55,6 @@ const Branches = () => {
         branch.zipCode,
         branch.phone,
         moment(branch.createdAt).format('L'),
-        moment(branch.updatedAt).format('L'),
         <div className='flex items-center justify-around'>
             <MdModeEdit
                 className='cursor-pointer'
