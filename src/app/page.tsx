@@ -6,10 +6,11 @@ import StatsCard from '@/components/StatsCard';
 import BookTable from '@/features/Books/BookTable';
 
 
+import AlertContext from "@/context/Alert";
 
 
 export default function Home() {
-  return (
+  return (<AlertContext>
     <div className="flex">
       <Sidebar />
       <div className=" p-10 flex-1">
@@ -20,5 +21,7 @@ export default function Home() {
         <BookTable />
       </div>
     </div>
+
+  </AlertContext>
   );
 }

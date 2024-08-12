@@ -5,17 +5,16 @@ import { useRouter } from 'next/navigation';
 import { removeEmptyValues } from "@/utils/tool";
 
 //Services
-import { BookService } from "@/services";
+import { BranchService } from "@/services";
 
 //Interface
-import { BookResponse } from "@/interface/Books";
-import { useAlert } from "@/context/Alert";
+import { BranchResponse } from "@/interface/Branch";
 
 
 
 
-export const getAllBooks = () => {
-    const [data, setdata] = useState<BookResponse[]>([]);
+export const getAllBranch = () => {
+    const [data, setdata] = useState<BranchResponse[]>([]);
 
     const [params, setparams] = useState<any>(
         {
@@ -39,7 +38,7 @@ export const getAllBooks = () => {
     useEffect(() => {
         setLoading(true);
 
-        BookService.getAllBooks(removeEmptyValues(params))
+        BranchService.getAllBranch(removeEmptyValues(params))
             .then((res) => {
                 setdata(res);
             })
@@ -49,24 +48,4 @@ export const getAllBooks = () => {
     }, [refetchCounter, params]);
 
     return { data, refetch, loading, params, setparams, setPage };
-};
-
-
-export const AddBook = () => {
-    const [loader, setLoader] = useState(false);
-    const { showAlert } = useAlert(); // Alert hook
-
-    const submit = async (body: any) => {
-        setLoader(true);
-
-        try {
-            const res = await BookService.addBook(body);
-            return true;
-        } catch (error) {
-            setLoader(false);
-            showAlert('error', error.response.data.error);
-        }
-    };
-
-    return { submit, loader };
 };
