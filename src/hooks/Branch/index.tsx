@@ -9,6 +9,7 @@ import { BranchService } from "@/services";
 
 //Interface
 import { BranchResponse } from "@/interface/Branch";
+import { useAlert } from "@/context/Alert";
 
 
 
@@ -38,7 +39,7 @@ export const getAllBranch = () => {
     useEffect(() => {
         setLoading(true);
 
-        BranchService.getAllBranch(removeEmptyValues(params))
+        BranchService.getAllBranches(removeEmptyValues(params))
             .then((res) => {
                 setdata(res);
             })
@@ -48,4 +49,63 @@ export const getAllBranch = () => {
     }, [refetchCounter, params]);
 
     return { data, refetch, loading, params, setparams, setPage };
+};
+
+
+export const addBranch = () => {
+    const [loader, setLoader] = useState(false);
+    const { showAlert } = useAlert();
+
+    const submit = async (body: any) => {
+        setLoader(true);
+        try {
+            await BranchService.addBranch(body);
+            showAlert('success', 'Branch added successfully');
+            return true;
+        } catch (error) {
+            setLoader(false);
+            showAlert('error', error.response.data.error);
+        }
+    };
+
+    return { submit, loader };
+};
+
+export const editBranch = () => {
+    const [loader, setLoader] = useState(false);
+    const { showAlert } = useAlert();
+
+    const submit = async (id: number, body: any) => {
+        setLoader(true);
+        try {
+            await BranchService.editBranch(id, body);
+            showAlert('success', 'Branch updated successfully');
+            return true;
+        } catch (error) {
+            setLoader(false);
+            showAlert('error', error.response.data.error);
+        }
+    };
+
+    return { submit, loader };
+};
+
+
+export const deleteBranch = () => {
+    const [loader, setLoader] = useState(false);
+    const { showAlert } = useAlert();
+
+    const submit = async (id: number) => {
+        setLoader(true);
+        try {
+            await BranchService.deleteBranch(id);
+            showAlert('success', 'Branch deleted successfully');
+            return true;
+        } catch (error) {
+            setLoader(false);
+            showAlert('error', error.response.data.error);
+        }
+    };
+
+    return { submit, loader };
 };
