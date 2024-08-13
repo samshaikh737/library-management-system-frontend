@@ -60,6 +60,7 @@ const EditBookForm: React.FC<EditBookFormProps> = ({ defaultData, onClose, onSub
       genre: formData.genre,
       quantity: Number(formData.quantity),
       currentBranch: formData.currentBranch,
+      branchId: branches.find((i)=> i.name == formData.currentBranch)?.id,
       status: formData.status,
       isbn: formData.isbn,
     };
