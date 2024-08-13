@@ -49,7 +49,7 @@ const CheckoutFilter = ({ onFilter }) => {
   };
 
   return (
-    <form onSubmit={handleFilter} className="flex space-x-4 p-4 bg-white rounded-lg shadow-lg">
+    <form onSubmit={handleFilter} className="flex space-x-4 p-4 bg-white rounded-lg shadow-lg flex-wrap">
       <div>
         <label className="block text-sm font-medium text-gray-700">Branch</label>
         <select

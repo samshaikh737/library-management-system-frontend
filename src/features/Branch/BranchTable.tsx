@@ -71,7 +71,7 @@ const Branches = () => {
     return (
         <div>
             <div className="flex items-center justify-between mb-5">
-                <h2 className="text-xl font-semibold">Branches</h2>
+                <h2 className="text-xl font-semibold">Branch</h2>
                 <button
                     onClick={() => setIsAddModalOpen(true)}
                     className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600"
