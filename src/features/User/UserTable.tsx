@@ -9,6 +9,7 @@ import AddUserForm from './AddUser';
 import EditUserForm from './EditUser';
 import { useUsers, useDeleteUser } from '@/hooks/User';
 import { useAlert } from '@/context/Alert';
+import UserFilter from './UserFilter';
 
 const headers = [
   'Name',
@@ -20,7 +21,7 @@ const headers = [
 ];
 
 const Users = () => {
-  const { data: users, refetch } = useUsers();
+  const { data: users, refetch,setparams } = useUsers();
   const { submit: deleteUser } = useDeleteUser();
   const { showAlert } = useAlert();
 
@@ -90,6 +91,8 @@ const Users = () => {
         )}
       </Modal>
 
+      <UserFilter onFilter={setparams} />
+      <div className="mt-5"></div>
       <Table headers={headers} rows={rows} />
     </div>
   );

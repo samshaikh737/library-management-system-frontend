@@ -3,25 +3,27 @@ import { useState, useEffect } from "react";
 import { UserService} from "@/services";
 import { useAlert } from "@/context/Alert";
 import { UserResponse } from "@/interface/User";
+import { removeEmptyValues } from "@/utils/tool";
 
 export const useUsers = () => {
     const [data, setData] = useState<UserResponse>([]);
     const [loading, setLoading] = useState(true);
     const [refetchCounter, setRefetchCounter] = useState(0);
-
+    const [params, setparams] = useState<any>(
+    );
     const { showAlert } = useAlert();
 
     const refetch = () => setRefetchCounter(prev => prev + 1);
 
     useEffect(() => {
         setLoading(true);
-        UserService.getAllUser()
+        UserService.getAllUser(removeEmptyValues(params))
             .then(res => setData(res))
             .catch(error => showAlert('error', error.message))
             .finally(() => setLoading(false));
-    }, [refetchCounter]);
+    }, [refetchCounter,params]);
 
-    return { data, refetch, loading };
+    return { data, refetch, loading,setparams };
 };
 
 export const useAddUser = () => {
