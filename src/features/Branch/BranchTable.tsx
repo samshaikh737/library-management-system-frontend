@@ -7,23 +7,22 @@ import Modal from '@/components/Modal';
 import AddBranchForm from '@/features/Branch/AddBranch';
 import EditBranchForm from '@/features/Branch/EditBranch';
 import { getAllBranch, deleteBranch } from '@/hooks/Branch';
-import { useAlert } from '@/context/Alert';
+import BranchFilter from './BranchFilter';
 
 const headers = [
     'Name',
-    'Address',
     'City',
     'State',
     'Zip Code',
     'Phone',
+    'Address',
     'Created At',
     'Actions',
 ];
 
 const Branches = () => {
-    const { data: branches, refetch } = getAllBranch();
+    const { data: branches, refetch, setparams } = getAllBranch();
     const deleteBranchHook = deleteBranch();
-    const { showAlert } = useAlert();
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedBranch, setSelectedBranch] = useState<any>(null);
@@ -49,11 +48,11 @@ const Branches = () => {
 
     const rows = useMemo(() => branches?.map(branch => [
         branch.name,
-        branch.address,
         branch.city,
         branch.state,
         branch.zipCode,
         branch.phone,
+        branch.address,
         moment(branch.createdAt).format('L'),
         <div className='flex items-center justify-around'>
             <MdModeEdit
@@ -93,6 +92,8 @@ const Branches = () => {
                 />
             </Modal>
 
+            <BranchFilter onFilter={setparams} />
+            <div className="mt-5"></div>
             <Table headers={headers} rows={rows} />
         </div>
     );
