@@ -20,5 +20,9 @@ interface Checkout {
   updatedAt: string;
   User: User;
   Book: Book;
+  Branch?: {
+    id: number;
+    name: string;
+  }
 }
 export type CheckoutResponse = Checkout[];

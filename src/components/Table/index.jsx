@@ -18,7 +18,7 @@ const Table = ({ headers, rows }) => {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, rowIndex) => (
+          {rows?.map((row, rowIndex) => (
             <tr
               key={rowIndex}
               className={`bg-white border-b  dark:border-gray-700 hover:bg-gray-50 text-black ${rowIndex === rows.length - 1 ? 'dark:border-gray-700' : ''

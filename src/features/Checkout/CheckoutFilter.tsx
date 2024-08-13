@@ -3,12 +3,15 @@ import React, { useState, useEffect } from 'react';
 
 import { getAllBooks } from '@/hooks/Books';
 import { useUsers } from '@/hooks/User';
+import { getAllBranch } from '@/hooks/Branch';
 
-const CheckoutFilter = ({  onFilter }) => {
-    const { data: users, loading: usersLoading } = useUsers();
-    const { data: books, loading: booksLoading } = getAllBooks();
+const CheckoutFilter = ({ onFilter }) => {
+  const { data: users, loading: usersLoading } = useUsers();
+  const { data: books, loading: booksLoading } = getAllBooks();
+  const { data: branches } = getAllBranch();
 
   const [filters, setFilters] = useState({
+    branchId: '',
     userId: '',
     bookId: '',
     status: ''
@@ -32,11 +35,13 @@ const CheckoutFilter = ({  onFilter }) => {
   // Handle reset
   const handleReset = () => {
     setFilters({
+      branchId: '',
       userId: '',
       bookId: '',
       status: ''
     });
     onFilter({
+      branchId: '',
       userId: '',
       bookId: '',
       status: ''
@@ -45,6 +50,21 @@ const CheckoutFilter = ({  onFilter }) => {
 
   return (
     <form onSubmit={handleFilter} className="flex space-x-4 p-4 bg-white rounded-lg shadow-lg">
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Branch</label>
+        <select
+          name="branchId"
+          value={filters.branchId}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:text-black"
+        >
+          <option value="">Select branch</option>
+          {branches && branches.map((branch: any) => (
+            <option key={branch.id} value={branch.id}>{branch.name}</option>
+          ))}
+        </select>
+      </div>
       <div>
         <label className="block text-sm font-medium text-gray-700">User</label>
         <select

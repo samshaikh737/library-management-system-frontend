@@ -12,6 +12,7 @@ import { useAlert } from '@/context/Alert';
 import CheckoutFilter from './CheckoutFilter';
 
 const headers = [
+  'Branch',
   'User',
   'Book',
   'Checkout Date',
@@ -44,6 +45,7 @@ const Checkouts = () => {
   };
 
   const rows = useMemo(() => checkouts?.map(checkout => [
+    checkout.Branch?.name,
     checkout.User.name,
     checkout.Book.title,
     moment(checkout.checkoutDate).format('L LT'),

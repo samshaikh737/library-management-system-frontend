@@ -5,6 +5,7 @@ import { useCreateCheckout } from '@/hooks/Checkout';
 import Loader from '@/components/Loader';
 import { useUsers } from '@/hooks/User';
 import { getAllBooks } from '@/hooks/Books';
+import { getAllBranch } from '@/hooks/Branch';
 
 interface AddCheckoutFormProps {
   onClose: () => void;
@@ -15,8 +16,10 @@ const AddCheckoutForm: React.FC<AddCheckoutFormProps> = ({ onClose, onSubmit }) 
   const { submit, loading } = useCreateCheckout();
   const { data: users, loading: usersLoading } = useUsers();
   const { data: books, loading: booksLoading } = getAllBooks();
+  const { data: branches } = getAllBranch();
 
   const [formData, setFormData] = useState({
+    branchId: '',
     userId: '',
     bookId: '',
     checkoutDate: '',
@@ -41,6 +44,22 @@ const AddCheckoutForm: React.FC<AddCheckoutFormProps> = ({ onClose, onSubmit }) 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 w-[400px]">
       <h2 className="text-lg font-semibold">Add Checkout</h2>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Branch</label>
+        <select
+          id="branchId"
+          value={formData.branchId}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:text-black"
+        >
+          <option value="">Select branch</option>
+          {branches && branches.map((branch: any) => (
+            <option key={branch.id} value={branch.id}>{branch.name}</option>
+          ))}
+        </select>
+      </div>
       <div>
         <label htmlFor="userId" className="block text-gray-700">User</label>
         <select
