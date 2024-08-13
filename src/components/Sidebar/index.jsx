@@ -44,6 +44,14 @@ const Sidebar = () => {
                                 <span>Checkouts</span>
                             </Link>
                         </li>
+                        <li>
+                            <Link
+                                href="/transfer"
+                                className={`flex items-center space-x-3 px-6 py-3 hover:bg-blue-100 ${pathname === '/transfer' ? 'bg-blue-500 text-white' : 'text-gray-600'}`}
+                            >
+                                <span>Transfer</span>
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
             </div>
