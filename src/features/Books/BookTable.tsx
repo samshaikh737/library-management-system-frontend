@@ -8,6 +8,7 @@ import AddBookForm from '@/features/Books/AddBook';
 import EditBookForm from '@/features/Books/EditBook'; // Adjust path as needed
 import { deleteBook, getAllBooks } from '@/hooks/Books';
 import { useAlert } from '@/context/Alert';
+import BookFilter from './BookFilter';
 
 const headers = [
   'Title',
@@ -22,7 +23,7 @@ const headers = [
 ];
 
 const Home = () => {
-  const { data: books, refetch } = getAllBooks(); // Fetch books data
+  const { data: books, refetch, setparams } = getAllBooks(); // Fetch books data
   const deleteBookHook = deleteBook(); // Hook for deleting books
   const { showAlert } = useAlert(); // Alert hook
 
@@ -104,6 +105,8 @@ const Home = () => {
         </Modal>
       )}
 
+      <BookFilter onFilter={setparams} />
+      <div className="mt-5"></div>
       <Table headers={headers} rows={rows} />
     </div>
   );
