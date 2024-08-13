@@ -3,25 +3,27 @@ import { useState, useEffect } from 'react';
 import { CheckoutService } from '@/services';
 import { useAlert } from '@/context/Alert';
 import { CheckoutResponse } from '@/interface/Checkout';
+import { removeEmptyValues } from '@/utils/tool';
 
 export const useCheckouts = () => {
     const [data, setData] = useState<CheckoutResponse>([]);
     const [loading, setLoading] = useState(true);
     const [refetchCounter, setRefetchCounter] = useState(0);
-
+    const [params, setparams] = useState<any>(
+    );
     const { showAlert } = useAlert();
 
     const refetch = () => setRefetchCounter(prev => prev + 1);
 
     useEffect(() => {
         setLoading(true);
-        CheckoutService.getAllCheckout()
+        CheckoutService.getAllCheckout(removeEmptyValues(params))
             .then(res => setData(res))
             .catch(error => showAlert('error', error.message))
             .finally(() => setLoading(false));
-    }, [refetchCounter]);
+    }, [refetchCounter,params]);
 
-    return { data, refetch, loading };
+    return { data, refetch, loading,setparams };
 };
 
 export const useCreateCheckout = () => {

@@ -9,6 +9,7 @@ import AddCheckoutForm from './AddCheckout';
 import EditCheckoutForm from './EditCheckout';
 import { useCheckouts, useDeleteCheckout } from '@/hooks/Checkout';
 import { useAlert } from '@/context/Alert';
+import CheckoutFilter from './CheckoutFilter';
 
 const headers = [
   'User',
@@ -20,7 +21,7 @@ const headers = [
 ];
 
 const Checkouts = () => {
-  const { data: checkouts, refetch } = useCheckouts();
+  const { data: checkouts, refetch,setparams } = useCheckouts();
   const { submit: deleteCheckout } = useDeleteCheckout();
   const { showAlert } = useAlert();
 
@@ -90,6 +91,8 @@ const Checkouts = () => {
         )}
       </Modal>
 
+      <CheckoutFilter onFilter={setparams} />
+      <div className="mt-5"></div>
       <Table headers={headers} rows={rows} />
     </div>
   );
