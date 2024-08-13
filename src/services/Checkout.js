@@ -13,8 +13,8 @@ const addCheckout = (body) => {
         return response.data;
     })
 }
-const editCheckout = (id, body) => {
-    return fetcher.put(`/checkouts/${id}`, body).then(response => {
+const returnCheckout = (id, body) => {
+    return fetcher.post(`/checkouts/return/${id}`, body).then(response => {
         return response.data;
     })
 }
@@ -27,6 +27,6 @@ const deleteCheckout = (id) => {
 export const CheckoutService = {
     getAllCheckout,
     addCheckout,
-    editCheckout,
+    returnCheckout,
     deleteCheckout
 }

@@ -16,7 +16,7 @@ const headers = [
   'Genre',
   'Quantity',
   'Current Branch',
-  'Status',
+  // 'Status',
   'ISBN',
   'Created At',
   'Actions',
@@ -60,7 +60,7 @@ const Home = () => {
     book.genre,
     book.quantity,
     book.currentBranch,
-    book.status,
+    // book.status,
     book.isbn,
     moment(book.createdAt).format('L'), // Format date
     <div className='flex items-center justify-around'>

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useEditUser } from '@/hooks/User';
 import Loader from '@/components/Loader';
+import { getAllBranch } from '@/hooks/Branch';
 
 interface EditUserFormProps {
   defaultData: any;
@@ -10,12 +11,15 @@ interface EditUserFormProps {
 }
 
 const EditUserForm: React.FC<EditUserFormProps> = ({ defaultData, onClose, onSubmit }) => {
+  const { data: branches } = getAllBranch();
+
   const { submit, loading } = useEditUser();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     role: 'member',
+    branchId: '',
   });
 
   useEffect(() => {
@@ -25,6 +29,7 @@ const EditUserForm: React.FC<EditUserFormProps> = ({ defaultData, onClose, onSub
         email: defaultData.email,
         phone: defaultData.phone,
         role: defaultData.role,
+        branchId: defaultData.branchId,
       });
     }
   }, [defaultData]);
@@ -92,7 +97,21 @@ const EditUserForm: React.FC<EditUserFormProps> = ({ defaultData, onClose, onSub
           <option value="librarian">Librarian</option>
         </select>
       </div>
-
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Branch</label>
+        <select
+          id="branchId"
+          value={formData.branchId}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:text-black"
+        >
+          <option value="">Select branch</option>
+          {branches && branches.map((branch: any) => (
+            <option key={branch.id} value={branch.id}>{branch.name}</option>
+          ))}
+        </select>
+      </div>
       <div className="flex gap-4">
         <button
           type="button"

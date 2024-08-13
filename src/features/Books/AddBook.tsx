@@ -138,7 +138,7 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ onClose, onSubmit }) => {
           ))}
         </select>
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="status" className="block text-gray-700">Status</label>
         <select
           id="status"
@@ -149,7 +149,7 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ onClose, onSubmit }) => {
           <option value="available">Available</option>
           <option value="checked_out">Checked Out</option>
         </select>
-      </div>
+      </div> */}
 
       <div className="flex gap-4">
         <button

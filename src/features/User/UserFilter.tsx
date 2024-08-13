@@ -1,8 +1,12 @@
+import { getAllBranch } from '@/hooks/Branch';
 import React, { useState } from 'react';
 
 const UserFilter = ({ onFilter }) => {
+  const { data: branches } = getAllBranch();
+
   // State for the filter inputs
   const [filters, setFilters] = useState({
+    branchId: '',
     name: '',
     email: '',
     phone: ''
@@ -26,11 +30,13 @@ const UserFilter = ({ onFilter }) => {
   // Handle reset
   const handleReset = () => {
     setFilters({
+      branchId: '',
       name: '',
       email: '',
       phone: ''
     });
     onFilter({
+      branchId: '',
       name: '',
       email: '',
       phone: ''
@@ -39,6 +45,21 @@ const UserFilter = ({ onFilter }) => {
 
   return (
     <form onSubmit={handleFilter} className="flex space-x-4 p-4 bg-white rounded-lg shadow-lg">
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Branch</label>
+        <select
+          name="branchId"
+          value={filters.branchId}
+          onChange={handleChange}
+          className="mt-1 p-2 border border-gray-300 rounded-md"
+        >
+          <option value="">Select branch</option>
+          {branches && branches.map((branch: any) => (
+            <option key={branch.name} value={branch.id}>{branch.name}</option>
+          ))}
+        </select>
+      </div>
+
       <div>
         <label className="block text-sm font-medium text-gray-700">Name</label>
         <input
@@ -72,6 +93,7 @@ const UserFilter = ({ onFilter }) => {
           placeholder="Search by phone"
         />
       </div>
+
       <div className="flex space-x-4 items-end">
         <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md">
           Filter

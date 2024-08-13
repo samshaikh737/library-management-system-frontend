@@ -47,14 +47,14 @@ export const useCreateCheckout = () => {
     return { submit, loading };
 };
 
-export const useUpdateCheckout = () => {
+export const useReturnCheckout = () => {
     const [loading, setLoading] = useState(false);
     const { showAlert } = useAlert();
 
     const submit = async (id: number, updateData: any) => {
         setLoading(true);
         try {
-            await CheckoutService.editCheckout(id, updateData);
+            await CheckoutService.returnCheckout(id, updateData);
             showAlert('success', 'Checkout updated successfully');
             return true;
         } catch (error) {

@@ -6,5 +6,9 @@ interface User {
   role: string;
   createdAt: string;
   updatedAt: string;
+  Branch?: {
+    id: number;
+    name: string;
+  }
 }
 export type UserResponse = User[];

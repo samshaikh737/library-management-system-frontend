@@ -12,6 +12,7 @@ import { useAlert } from '@/context/Alert';
 import UserFilter from './UserFilter';
 
 const headers = [
+  'Branch',
   'Name',
   'Email',
   'Phone',
@@ -44,6 +45,7 @@ const Users = () => {
   };
 
   const rows = useMemo(() => users?.map(user => [
+    user.Branch?.name,
     user.name,
     user.email,
     user.phone,

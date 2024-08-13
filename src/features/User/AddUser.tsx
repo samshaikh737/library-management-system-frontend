@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useAddUser } from '@/hooks/User';
 import Loader from '@/components/Loader';
+import { getAllBranch } from '@/hooks/Branch';
 
 interface AddUserFormProps {
   onClose: () => void;
@@ -9,15 +10,19 @@ interface AddUserFormProps {
 }
 
 const AddUserForm: React.FC<AddUserFormProps> = ({ onClose, onSubmit }) => {
+  const { data: branches } = getAllBranch();
+
+
   const { submit, loading } = useAddUser();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     role: 'member',
+    branchId: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { id, value } = e.target;
     setFormData(prev => ({ ...prev, [id]: value }));
   };
@@ -68,7 +73,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({ onClose, onSubmit }) => {
         />
       </div>
       <div>
-        <label htmlFor="role" className="block text-gray-700">Role</label>
+        <label htmlFor="role" className="block text-gray-700">Type</label>
         <select
           id="role"
           value={formData.role}
@@ -81,6 +86,21 @@ const AddUserForm: React.FC<AddUserFormProps> = ({ onClose, onSubmit }) => {
         </select>
       </div>
 
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Branch</label>
+        <select
+          id="branchId"
+          value={formData.branchId}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:text-black"
+        >
+          <option value="">Select branch</option>
+          {branches && branches.map((branch: any) => (
+            <option key={branch.id} value={branch.id}>{branch.name}</option>
+          ))}
+        </select>
+      </div>
       <div className="flex gap-4">
         <button
           type="button"
