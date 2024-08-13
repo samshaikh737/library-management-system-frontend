@@ -19,7 +19,7 @@ export const useUsers = () => {
         setLoading(true);
         UserService.getAllUser(removeEmptyValues(params))
             .then(res => setData(res))
-            .catch(error => showAlert('error', error.message))
+            .catch(error => showAlert('error', error?.response?.data?.error))
             .finally(() => setLoading(false));
     }, [refetchCounter,params]);
 
@@ -37,7 +37,7 @@ export const useAddUser = () => {
             showAlert('success', 'User added successfully');
             return true;
         } catch (error) {
-            showAlert('error', error.message);
+            showAlert('error', error?.response?.data?.error);
             return false;
         } finally {
             setLoading(false);
@@ -58,7 +58,7 @@ export const useEditUser = () => {
             showAlert('success', 'User edited successfully');
             return true;
         } catch (error) {
-            showAlert('error', error.message);
+            showAlert('error', error?.response?.data?.error);
             return false;
         } finally {
             setLoading(false);
@@ -79,7 +79,7 @@ export const useDeleteUser = () => {
             showAlert('success', 'User deleted successfully');
             return true;
         } catch (error) {
-            showAlert('error', error.message);
+            showAlert('error', error?.response?.data?.error);
             return false;
         } finally {
             setLoading(false);

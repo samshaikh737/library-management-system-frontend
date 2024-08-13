@@ -17,7 +17,7 @@ export default function Home() {
     <div className="flex">
       <Sidebar />
       <div className=" p-10 flex-1">
-        <Header />
+        {/* <Header /> */}
         <StatsCard />
 
         <div className="mt-10"></div>

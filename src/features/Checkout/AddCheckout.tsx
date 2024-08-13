@@ -20,7 +20,7 @@ const AddCheckoutForm: React.FC<AddCheckoutFormProps> = ({ onClose, onSubmit }) 
     userId: '',
     bookId: '',
     checkoutDate: '',
-    returnDate: '',
+    // returnDate: '',
     status: 'checked_out',
   });
 
@@ -90,7 +90,7 @@ const AddCheckoutForm: React.FC<AddCheckoutFormProps> = ({ onClose, onSubmit }) 
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:text-black"
         />
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="returnDate" className="block text-gray-700">Return Date</label>
         <input
           id="returnDate"
@@ -100,8 +100,8 @@ const AddCheckoutForm: React.FC<AddCheckoutFormProps> = ({ onClose, onSubmit }) 
           required
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:text-black"
         />
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <label htmlFor="status" className="block text-gray-700">Status</label>
         <select
           id="status"
@@ -113,7 +113,7 @@ const AddCheckoutForm: React.FC<AddCheckoutFormProps> = ({ onClose, onSubmit }) 
           <option value="checked_out">Checked Out</option>
           <option value="returned">Returned</option>
         </select>
-      </div>
+      </div> */}
 
       <div className="flex gap-4">
         <button

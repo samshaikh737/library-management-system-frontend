@@ -1,7 +1,7 @@
 // features/Checkouts/Checkouts.tsx
 import { useState, useMemo } from 'react';
 import moment from 'moment';
-import { MdModeEdit } from 'react-icons/md';
+import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import Table from '@/components/Table';
 import Modal from '@/components/Modal';
@@ -47,17 +47,18 @@ const Checkouts = () => {
     checkout.User.name,
     checkout.Book.title,
     moment(checkout.checkoutDate).format('L LT'),
-    moment(checkout.returnDate).format('L LT'),
+    checkout.returnDate ? moment(checkout.returnDate).format('L LT'): '-',
     checkout.status,
     <div className='flex items-center justify-around'>
-      <MdModeEdit
+      {checkout.status != 'returned' && <IoCheckmarkDoneCircle
         className='cursor-pointer'
         size={20}
         onClick={() => {
           setEditCheckoutData(checkout);
           setIsEditModalOpen(true);
         }}
-      />
+        title='Return'
+      />}
       <RiDeleteBin6Line
         className='cursor-pointer text-red-500'
         size={20}

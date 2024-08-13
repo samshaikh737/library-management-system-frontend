@@ -19,7 +19,7 @@ export const useCheckouts = () => {
         setLoading(true);
         CheckoutService.getAllCheckout(removeEmptyValues(params))
             .then(res => setData(res))
-            .catch(error => showAlert('error', error.message))
+            .catch(error => showAlert('error', error?.response?.data?.error))
             .finally(() => setLoading(false));
     }, [refetchCounter,params]);
 
@@ -37,7 +37,7 @@ export const useCreateCheckout = () => {
             showAlert('success', 'Checkout created successfully');
             return true;
         } catch (error) {
-            showAlert('error', error.message);
+            showAlert('error', error?.response?.data?.error);
             return false;
         } finally {
             setLoading(false);
@@ -58,7 +58,7 @@ export const useUpdateCheckout = () => {
             showAlert('success', 'Checkout updated successfully');
             return true;
         } catch (error) {
-            showAlert('error', error.message);
+            showAlert('error', error?.response?.data?.error);
             return false;
         } finally {
             setLoading(false);
@@ -79,7 +79,7 @@ export const useDeleteCheckout = () => {
             showAlert('success', 'Checkout deleted successfully');
             return true;
         } catch (error) {
-            showAlert('error', error.message);
+            showAlert('error', error?.response?.data?.error);
             return false;
         } finally {
             setLoading(false);
