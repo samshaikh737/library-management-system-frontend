@@ -1,3 +1,4 @@
+import { getAnalytics } from '@/hooks/Analytics';
 import React from 'react';
 
 const Icon = ({ icon: IconComponent, bgColor }) => {
@@ -21,33 +22,36 @@ const StatsCard = ({ value, label, icon: IconComponent, bgColor }) => {
     );
 };
 
-import { FaExclamationCircle, FaBook, FaUserPlus, FaUsers } from 'react-icons/fa';
+import { FaBook, FaWarehouse, FaUserPlus, FaUsers } from 'react-icons/fa';
+import { TbTruckDelivery } from "react-icons/tb";
 
-export default function Home() {
+export default function Index() {
+    const { data: analytics } = getAnalytics()
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
             <StatsCard
-                value="1223"
-                label="Total Visitors"
-                icon={FaUsers}
+                value={analytics.totalBooks}
+                label="Total Books"
+                icon={FaBook}
                 bgColor="bg-red-500"
             />
             <StatsCard
-                value="740"
-                label="Borrowed Books"
-                icon={FaBook}
+                value={analytics.totalUsers}
+                label="Total Users"
+                icon={FaUsers}
                 bgColor="bg-blue-500"
             />
             <StatsCard
-                value="22"
-                label="Overdue Books"
-                icon={FaExclamationCircle}
+                value={analytics.totalBranches}
+                label="Total Branches"
+                icon={FaWarehouse}
                 bgColor="bg-yellow-500"
             />
             <StatsCard
-                value="60"
-                label="New Members"
-                icon={FaUserPlus}
+                value={analytics.totalCheckouts}
+                label="Total Checkouts"
+                icon={TbTruckDelivery}
                 bgColor="bg-green-500"
             />
         </div>
