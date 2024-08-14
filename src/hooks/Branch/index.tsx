@@ -64,7 +64,7 @@ export const addBranch = () => {
             return true;
         } catch (error) {
             setLoader(false);
-            showAlert('error', error.response.data.error);
+            showAlert('error', error?.response?.data?.error);
         }
     };
 
@@ -83,7 +83,7 @@ export const editBranch = () => {
             return true;
         } catch (error) {
             setLoader(false);
-            showAlert('error', error.response.data.error);
+            showAlert('error', error?.response?.data?.error);
         }
     };
 
@@ -103,7 +103,7 @@ export const deleteBranch = () => {
             return true;
         } catch (error) {
             setLoader(false);
-            showAlert('error', error.response.data.error);
+            showAlert('error', error?.response?.data?.error);
         }
     };
 

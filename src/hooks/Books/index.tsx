@@ -65,7 +65,7 @@ export const AddBook = () => {
             return true;
         } catch (error) {
             setLoader(false);
-            showAlert('error', error.response.data.error);
+            showAlert('error', error?.response?.data?.error);
         }
     };
 
@@ -84,7 +84,7 @@ export const EditBook = () => {
             return true;
         } catch (error) {
             setLoader(false);
-            showAlert('error', error.response.data.error);
+            showAlert('error', error?.response?.data?.error);
         }
     };
 
@@ -103,7 +103,7 @@ export const deleteBook = () => {
             return true;
         } catch (error) {
             setLoader(false);
-            showAlert('error', error.response.data.error);
+            showAlert('error', error?.response?.data?.error);
         }
     };
 

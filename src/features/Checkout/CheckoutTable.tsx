@@ -48,8 +48,8 @@ const Checkouts = () => {
     checkout.Branch?.name,
     checkout.User.name,
     checkout.Book.title,
-    moment(checkout.checkoutDate).format('L LT'),
-    checkout.returnDate ? moment(checkout.returnDate).format('L LT'): '-',
+    moment(checkout.checkoutDate).format('DD/MM/YYYY h:mm:ss a'),
+    checkout.returnDate ? moment(checkout.returnDate).format('DD/MM/YYYY h:mm:ss a'): '-',
     checkout.status,
     <div className='flex items-center justify-around'>
       {checkout.status != 'returned' && <IoCheckmarkDoneCircle

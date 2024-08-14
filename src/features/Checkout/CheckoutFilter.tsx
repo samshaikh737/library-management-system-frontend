@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 
 import { getAllBooks } from '@/hooks/Books';
 import { useUsers } from '@/hooks/User';
@@ -14,7 +14,9 @@ const CheckoutFilter = ({ onFilter }) => {
     branchId: '',
     userId: '',
     bookId: '',
-    status: ''
+    status: '',
+    startDate: '',
+    endDate: ''
   });
 
   // Handle input change
@@ -29,7 +31,14 @@ const CheckoutFilter = ({ onFilter }) => {
   // Handle filter form submission
   const handleFilter = (e) => {
     e.preventDefault();
-    onFilter(filters);
+
+    const formattedFilters = {
+      ...filters,
+      startDate: filters.startDate ? moment(filters.startDate).format('L') : '',
+      endDate: filters.endDate ? moment(filters.endDate).format('L') : ''
+    };
+
+    onFilter(formattedFilters);
   };
 
   // Handle reset
@@ -38,13 +47,17 @@ const CheckoutFilter = ({ onFilter }) => {
       branchId: '',
       userId: '',
       bookId: '',
-      status: ''
+      status: '',
+      startDate: '',
+      endDate: ''
     });
     onFilter({
       branchId: '',
       userId: '',
       bookId: '',
-      status: ''
+      status: '',
+      startDate: '',
+      endDate: ''
     });
   };
 
@@ -98,7 +111,6 @@ const CheckoutFilter = ({ onFilter }) => {
           ))}
         </select>
       </div>
-
       <div>
         <label className="block text-sm font-medium text-gray-700">Status</label>
         <select
@@ -112,6 +124,30 @@ const CheckoutFilter = ({ onFilter }) => {
           <option value="returned">Returned</option>
         </select>
       </div>
+
+      {/* Date Range Filters */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Start Date</label>
+        <input
+          type="date"
+          name="startDate"
+          value={filters.startDate}
+          onChange={handleChange}
+          className="mt-1 p-2 border border-gray-300 rounded-md"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">End Date</label>
+        <input
+          type="date"
+          name="endDate"
+          value={filters.endDate}
+          onChange={handleChange}
+          required={filters.startDate}
+          className="mt-1 p-2 border border-gray-300 rounded-md"
+        />
+      </div>
+
       <div className="flex space-x-4 items-end">
         <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md">
           Filter
